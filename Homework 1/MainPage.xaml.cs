@@ -145,6 +145,14 @@ namespace Homework_1
             // mediaPlayer is a MediaPlayerElement defined in XAML
             if (file != null)
             {
+                /*
+                MediaElement newMediaPlayer = new MediaElement();
+                playAreaGrid.Children.Add(newMediaPlayer);
+
+                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                newMediaPlayer.SetSource(stream, file.ContentType);
+                newMediaPlayer.Play();
+                */
                 var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
                 mediaPlayer.SetSource(stream, file.ContentType);
                 mediaPlayer.Play();
