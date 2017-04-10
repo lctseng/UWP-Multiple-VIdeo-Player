@@ -7,7 +7,83 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid
+        AllowDrop="True"
+                    Drop="Grid_Drop"
+                    DragOver="Grid_DragOver"
+        >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="#2f5cb6"/>
+        <Border Grid.Column ="1" Background="#1f3d7a"/>
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="#152951"/>
+        <StackPanel Grid.Column="1" Margin="40,0,0,0" VerticalAlignment="Center">
+            <TextBlock Foreground="White" FontSize="25" Text="Today - 64° F"/>
+            <TextBlock Foreground="White" FontSize="25" Text="Partially Cloudy"/>
+            <TextBlock Foreground="White" FontSize="25" Text="Precipitation: 25%"/>
+            <TextBox 
+                Name="txtFilePath"
+                FontSize="20"
+                KeyUp="TxtFilePath_KeyUp"
+                Header="File path"
+                PlaceholderText="Enter file path" 
+            />
+            <Button Content="Choose file" Click="Choose_File_Click"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" 
+                    Orientation="Horizontal"
+            HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Content="Yooooo!" Click="Button_Click_1"/>
+            <TextBlock Foreground="White" FontSize="25" Text="High: 66°" Margin="0,0,20,0"/>
+            <TextBlock Foreground="White" FontSize="25" Text="Low: 43°" Margin="0,0,20,0"/>
+            <TextBlock Foreground="White" FontSize="25" Text="Feels like: 63°"/>
+            <CommandBar>
+                <AppBarToggleButton Icon="Shuffle" Label="Shuffle" Click="AppBarButton_Click" />
+                <AppBarToggleButton Icon="RepeatAll" Label="Repeat" Click="AppBarButton_Click"/>
+                <AppBarSeparator/>
+                <AppBarButton Icon="Back" Label="Back" Click="AppBarButton_Click"/>
+                <AppBarButton Icon="Stop" Label="Stop" Click="AppBarButton_Click"/>
+                <AppBarButton Icon="Play" Label="Play" Click="AppBarButton_Click"/>
+                <AppBarButton Icon="Forward" Label="Forward" Click="AppBarButton_Click"/>
+
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Icon="Like" Label="Like" Click="AppBarButton_Click"/>
+                    <AppBarButton Icon="Dislike" Label="Dislike" Click="AppBarButton_Click"/>
+                </CommandBar.SecondaryCommands>
+
+                <CommandBar.Content>
+                    <TextBlock Text="Now playing..." Margin="12,14"/>
+                </CommandBar.Content>
+            </CommandBar>
+        </StackPanel>
+
+        <MediaElement Source="Assets/fishes.wmv"  
+                      Name="mediaPlayer"
+                      AutoPlay="False"
+                      AreTransportControlsEnabled="True"
+                          
+                          ManipulationMode="All"
+            ManipulationDelta="mediaPlayer_ManipulationDelta"
+            ManipulationStarted="Viewbox_ManipulationStarted"
+            ManipulationCompleted="Viewbox_ManipulationCompleted"
+                      >
+            <MediaElement.TransportControls>
+                <MediaTransportControls IsZoomButtonVisible="False"
+                                        IsPlaybackRateButtonVisible="True"
+                                        IsPlaybackRateEnabled="True"
+                                        IsFullWindowButtonVisible="False" 
+                                        IsFullWindowEnabled="False"/>
+            </MediaElement.TransportControls>
+        </MediaElement>
+
+
 
     </Grid>
+
 </Page>
