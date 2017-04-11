@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+using System.Collections;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -32,17 +33,17 @@ namespace Homework_1
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public bool ctrlPressed { get; set; }
 
-        private CompositeTransform transform;
-        private bool ctrlPressed;
+        ArrayList players;
 
         public MainPage()
         {
             this.InitializeComponent();
-            this.transform = new CompositeTransform();
+            players = new ArrayList();
+
+
             ctrlPressed = false;
-            // Apply the translation to the Rectangle.
-            mediaPlayer.RenderTransform = transform;
 
             Window.Current.CoreWindow.KeyDown += (s, e) =>
             {
@@ -60,6 +61,7 @@ namespace Homework_1
                     ctrlPressed = false;
                 }
             };
+            
         }
 
         private void AppBarButton_Click(object sender, RoutedEventArgs e)
@@ -91,8 +93,13 @@ namespace Homework_1
         {
             try
             {
+                
                 Uri pathUri = new Uri(path);
-                mediaPlayer.Source = pathUri;
+                FloatMediaElement player = new FloatMediaElement(this);
+                player.mediaElement.Source = pathUri;
+                player.mediaElement.Play();
+                players.Add(player);
+
             }
             catch (Exception ex)
             {
@@ -142,20 +149,13 @@ namespace Homework_1
 
         private async Task<bool> PlayFromFile(StorageFile file)
         {
-            // mediaPlayer is a MediaPlayerElement defined in XAML
             if (file != null)
             {
-                /*
-                MediaElement newMediaPlayer = new MediaElement();
-                playAreaGrid.Children.Add(newMediaPlayer);
-
                 var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                newMediaPlayer.SetSource(stream, file.ContentType);
-                newMediaPlayer.Play();
-                */
-                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                mediaPlayer.SetSource(stream, file.ContentType);
-                mediaPlayer.Play();
+                FloatMediaElement player = new FloatMediaElement(this);                
+                player.mediaElement.SetSource(stream, file.ContentType);
+                player.mediaElement.Play();
+                players.Add(player);
                 return true;
             }
             else
@@ -164,46 +164,29 @@ namespace Homework_1
             }
         }
 
+        public double maxPlayWidth()
+        {
+            return playAreaGrid.ActualWidth ;
+        }
+
+        public double maxPlayHeight()
+        {
+            return playAreaGrid.ActualHeight - 50;
+        }
+
         private void Grid_DragOver(object sender, DragEventArgs e)
         {
             e.AcceptedOperation = DataPackageOperation.Link;
         }
 
-        private void mediaPlayer_ManipulationDelta(object sender, ManipulationDeltaRoutedEventArgs e)
-        {
-            ManipulationDelta md = e.Delta;
-            Point trans = md.Translation;
-            if (ctrlPressed)
-            {
-                // Scale
-                transform.ScaleX = Clamp(transform.ScaleX + trans.X / 100.0, 0.1, 5.0);
-                transform.ScaleY = Clamp(transform.ScaleY + trans.X / 100.0, 0.1, 5.0);
-            }
-            else
-            {
-                // Translate
-                transform.TranslateX = Clamp(transform.TranslateX + trans.X, 0.0, 100.0);
-                transform.TranslateY = Clamp(transform.TranslateY + trans.Y, 0.0, 100.0);
-            }
-            e.Handled = true;
-        }
-
-        private void Viewbox_ManipulationStarted(object sender, ManipulationStartedRoutedEventArgs e)
-        {
-            var element = ((FrameworkElement)(sender));
-            element.Opacity = 0.4;
-
-        }
-
-        private void Viewbox_ManipulationCompleted(object sender, ManipulationCompletedRoutedEventArgs e)
-        {
-            var element = ((FrameworkElement)(sender));
-            element.Opacity = 1.0;
-        }
-
         public static double Clamp(double value, double min, double max)
         {
             return (value < min) ? min : (value > max) ? max : value;
+        }
+
+        public Grid getPlayAreaGrid()
+        {
+            return playAreaGrid;
         }
 
 
