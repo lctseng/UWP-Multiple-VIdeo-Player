@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +31,8 @@ namespace Homework_1
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
+            ApplicationView.PreferredLaunchViewSize = new Size(1600, 900);
         }
 
         /// <summary>
@@ -76,6 +79,7 @@ namespace Homework_1
                 }
                 // 確定目前視窗是作用中
                 Window.Current.Activate();
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(500, 500));
             }
         }
 

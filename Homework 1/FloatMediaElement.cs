@@ -58,7 +58,7 @@ namespace Homework_1
             mediaElement.ManipulationCompleted += playerManipulationCompleted;
             mediaElement.HorizontalAlignment = HorizontalAlignment.Left;
             mediaElement.VerticalAlignment = VerticalAlignment.Top;
-            //mediaElement.IsLooping = true;
+            mediaElement.IsLooping = page.GetLoopingEnabled() ;
             mediaElement.TransportControls.IsZoomEnabled = mediaElement.TransportControls.IsZoomButtonVisible = false;
             mediaElement.TransportControls.IsPlaybackRateEnabled = mediaElement.TransportControls.IsPlaybackRateButtonVisible = true;
             mediaElement.TransportControls.IsFullWindowEnabled = mediaElement.TransportControls.IsFullWindowButtonVisible = false;

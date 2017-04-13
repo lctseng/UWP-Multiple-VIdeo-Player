@@ -190,7 +190,23 @@ namespace Homework_1
             return playAreaGrid;
         }
 
+        private async void DisplayAboutDialog(object sender, RoutedEventArgs e)
+        {
+            ContentDialog deleteFileDialog = new ContentDialog()
+            {
+                Title = "About",
+                Content = "The Homework 1 of Multimedia Computing Environment – Project of Video Applications. \n\nYou can play multiple video at the same time, however it consumes many system resource. \n\nYou can play the video via dragging the file into the player, or choose a local file. \n\nYou can also play video files from web via typing the URL. \n\nAuthor: Henry Tseng (a.k.a lctseng) \nStudent ID: R05922035.\nDepartment of Computer Science\nNational Taiwan University",
+                PrimaryButtonText = "Close this window",
+            };
 
+            ContentDialogResult result = await deleteFileDialog.ShowAsync();
+
+        }
+
+        public bool GetLoopingEnabled()
+        {
+            return appLoopButton.IsChecked.GetValueOrDefault();
+        }
     }
 
 }

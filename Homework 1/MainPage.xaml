@@ -27,17 +27,18 @@
                 <CommandBar.Content>
                     <TextBox
                         x:Name="txtFilePath"
-                        FontSize="20"
-                        Width="800"
+                        FontSize="24"
+                        Width="1000"
                         Height="50"
+                        TextAlignment="Justify"
                         KeyUp="TxtFilePath_KeyUp"
-                        PlaceholderText="Enter file path (ms-appx:///Assets/fishes.wmv or http://example.com/video.mp4)" 
+                        PlaceholderText="Enter vdeio URI (ms-appx:///Assets/fishes.wmv or http://example.com/video.mp4)" 
                     />
                 </CommandBar.Content>
-                <AppBarToggleButton Icon="RepeatOne" Label="RepeatOne" />
+                <AppBarToggleButton Name="appLoopButton" Icon="RepeatOne" Label="Repeat" />
                 <AppBarSeparator/>
-                <AppBarButton Icon="Add" Label="Add" Click="Choose_File_Click"/>
-                <AppBarButton Icon="Emoji2" Label="About" Click="AppBarButton_Click"/>
+                <AppBarButton Icon="Add" Label="Add video" Click="Choose_File_Click"/>
+                <AppBarButton Icon="Emoji2" Label="About" Click="DisplayAboutDialog"/>
 
             </CommandBar>
         </StackPanel>
