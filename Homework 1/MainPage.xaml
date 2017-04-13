@@ -24,30 +24,22 @@
                     >
             <CommandBar x:Name="commandBar">
 
-                <CommandBar.SecondaryCommands>
-                    <AppBarButton Icon="Like" Label="Like" Click="AppBarButton_Click"/>
-                    <AppBarButton Icon="Dislike" Label="Dislike" Click="AppBarButton_Click"/>
-                </CommandBar.SecondaryCommands>
-
                 <CommandBar.Content>
-                    <TextBlock x:Name="commandBarText" Text="Now playing..."/>
+                    <TextBox
+                        x:Name="txtFilePath"
+                        FontSize="20"
+                        Width="800"
+                        Height="50"
+                        KeyUp="TxtFilePath_KeyUp"
+                        PlaceholderText="Enter file path (ms-appx:///Assets/fishes.wmv or http://example.com/video.mp4)" 
+                    />
                 </CommandBar.Content>
-                <AppBarToggleButton Icon="Shuffle" Label="Shuffle" Click="AppBarButton_Click" />
-                <AppBarToggleButton Icon="RepeatAll" Label="Repeat" Click="AppBarButton_Click"/>
+                <AppBarToggleButton Icon="RepeatOne" Label="RepeatOne" />
                 <AppBarSeparator/>
-                <AppBarButton Icon="Back" Label="Back" Click="AppBarButton_Click"/>
-                <AppBarButton Icon="Stop" Label="Stop" Click="AppBarButton_Click"/>
-                <AppBarButton Icon="Play" Label="Play" Click="AppBarButton_Click"/>
-                <AppBarButton Icon="Forward" Label="Forward" Click="AppBarButton_Click"/>
+                <AppBarButton Icon="Add" Label="Add" Click="Choose_File_Click"/>
+                <AppBarButton Icon="Emoji2" Label="About" Click="AppBarButton_Click"/>
 
             </CommandBar>
-            <TextBox
-            x:Name="txtFilePath"
-            FontSize="20"
-            KeyUp="TxtFilePath_KeyUp"
-            PlaceholderText="Enter file path" 
-            />
-            <Button Content="Choose file" Click="Choose_File_Click"/>
         </StackPanel>
 
     </Grid>

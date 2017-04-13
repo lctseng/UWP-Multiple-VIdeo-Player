@@ -85,6 +85,7 @@ namespace Homework_1
                 if (tbPath != null)
                 {
                     LoadMediaFromString(tbPath.Text);
+                    txtFilePath.Text = "";
                 }
             }
         }
